@@ -1,44 +1,28 @@
 package crossword.example;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.charset.Charset;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Component
 public class SolvingCrosswordImpl implements SolvingCrossword {
 
-    private final static List<String> woordbooks1 = new ArrayList<>();
+    private final WordReader wordReader;
 
-    public static void main(String[] args) {
-    SolvingCrosswordImpl s1 = new SolvingCrosswordImpl();
-        BufferedReader br;
-
-        {
-            try {
-                br = new BufferedReader(new FileReader("C:\\Users\\Администратор\\Desktop\\Favorites" +
-                        "\\russian-words-master\\russian-words-master\\russian.txt",
-                        Charset.forName("windows-1251")));
-                String line;
-                while ((line = br.readLine()) != null) {
-                    woordbooks1.add(br.readLine());
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.println(woordbooks1.get(20) + " " + woordbooks1.get(20).length());
+    public SolvingCrosswordImpl(WordReader wordReader) {
+        this.wordReader = wordReader;
     }
 
     @Override
-    public  List<String> getOptions(String wordToGuess,List<String> woordbook) {
+    public List<String> getOptions(String wordToGuess) {
         List<String> result = new ArrayList<>();
 
-        List<String> filter1 = woordbook.stream().filter(s -> s.length() == wordToGuess.length())
+        List<String> woordBook = wordReader.getWords();
+        List<String> filter1 = woordBook.stream().filter(s -> s.length() == wordToGuess.length())
                 .collect(Collectors.toList());
 
         Map<Integer, Character> letters = new HashMap<>();
