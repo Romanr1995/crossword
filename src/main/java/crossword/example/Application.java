@@ -1,5 +1,6 @@
 package crossword.example;
 
+import crossword.example.service.SolvingCrossword;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -10,6 +11,7 @@ public class Application {
 
         SolvingCrossword bean = context.getBean(SolvingCrossword.class);
 
-        bean.getOptions("абажурчик**");
+        System.out.println(bean.getOptions("абажурчик**"));
+
     }
 }
