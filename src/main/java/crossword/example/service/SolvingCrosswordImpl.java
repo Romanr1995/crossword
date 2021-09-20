@@ -22,6 +22,9 @@ public class SolvingCrosswordImpl implements SolvingCrossword {
     public List<String> getOptions(String wordToGuess) {
         List<String> result = new ArrayList<>();
 
+        if (wordToGuess.length() == 0) {
+            throw new RuntimeException("Введено некорректное значение");
+        }
         List<String> wordBook = wordReader.getWords();
 
         List<String> filter1 = wordBook.stream().filter(s -> s.length() == wordToGuess.length())
