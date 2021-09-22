@@ -11,7 +11,8 @@ public class Application {
 
         SolvingCrossword bean = context.getBean(SolvingCrossword.class);
 
-        System.out.println(bean.getOptions("абажурчик**"));
+
+        System.out.println(bean.getOptions("подоконн**"));
 
     }
 }

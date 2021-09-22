@@ -14,18 +14,18 @@ public class WordReaderImpl implements WordReader {
 
     @Override
     public List<String> getWords() {
-        List<String> woordboks = new ArrayList<>();
+        List<String> wordboks = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(getClass().getClassLoader()
                 .getResource("russian.txt").getFile(), Charset.forName("windows-1251")))) {
             String line;
-            for (int i = 0; i < 1532629;i++) {
-                woordboks.add(reader.readLine());
+            while (reader.ready()) {
+                wordboks.add(reader.readLine());
             }
-            woordboks.remove(766314);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return woordboks;
+        return wordboks;
     }
 }
