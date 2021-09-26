@@ -12,7 +12,7 @@ public class Application {
         SolvingCrossword bean = context.getBean(SolvingCrossword.class);
 
 
-        System.out.println(bean.getOptions("подоконн**"));
+        System.out.println(bean.getOptions("авто"));
 
     }
 }
