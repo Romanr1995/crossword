@@ -24,23 +24,16 @@ public class SolvingCrosswordImpl implements SolvingCrossword {
         }
         List<String> wordBook = wordReader.getWords();
 
-        List<String> filter1 = wordBook.stream().filter(s -> s.length() == wordToGuess.length())
-                .collect(Collectors.toList());
-
-        Map<Integer, Character> letters = new HashMap<>();
-        for (int i = 0; i < wordToGuess.length(); i++) {
-
-            if (wordToGuess.charAt(i) != '*') {
-                letters.put(i, wordToGuess.charAt(i));
-            }
-        }
         OUT:
-        for (String s : filter1) {
-            for (Map.Entry<Integer, Character> m : letters.entrySet()) {
-                Integer index = m.getKey();
-                Character letter = m.getValue();
+        for (String s : wordBook) {
+            if (s.length() != wordToGuess.length()) continue;
 
-                if (s.charAt(index) != letter) {
+            for (int i = 0; i < wordToGuess.length(); i++) {
+                char letter = wordToGuess.charAt(i);
+
+                if (letter == '*') continue;
+
+                if (s.charAt(i) != letter) {
                     continue OUT;
                 }
             }

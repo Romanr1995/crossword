@@ -3,11 +3,11 @@ package service;
 import crossword.example.data.WordReaderImpl;
 import crossword.example.service.SolvingCrossword;
 import crossword.example.service.SolvingCrosswordImpl;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
