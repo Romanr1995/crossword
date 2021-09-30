@@ -3,8 +3,8 @@ package crossword.example.service;
 import crossword.example.data.WordReader;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class SolvingCrosswordImpl implements SolvingCrossword {
@@ -22,11 +22,10 @@ public class SolvingCrosswordImpl implements SolvingCrossword {
         if (wordToGuess.length() == 0) {
             throw new RuntimeException("Введено некорректное значение");
         }
-        List<String> wordBook = wordReader.getWords();
+        List<String> wordBook = wordReader.getWords().get(wordToGuess.length());
 
         OUT:
         for (String s : wordBook) {
-            if (s.length() != wordToGuess.length()) continue;
 
             for (int i = 0; i < wordToGuess.length(); i++) {
                 char letter = wordToGuess.charAt(i);

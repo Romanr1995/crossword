@@ -8,22 +8,24 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class WordReaderImpl implements WordReader {
 
-    private final List<String> words;
+    private final Map<Integer, List<String>> words;
 
-    public WordReaderImpl() throws IOException{
+    public WordReaderImpl() throws IOException {
         this.words = readWordsFile();
     }
 
     @Override
-    public List<String> getWords() {
-       return words;
+    public Map<Integer, List<String>> getWords() {
+        return words;
     }
 
-    private List<String > readWordsFile() throws IOException {
+    private Map<Integer, List<String>> readWordsFile() throws IOException {
         final List<String> words = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(getClass().getClassLoader()
@@ -34,6 +36,12 @@ public class WordReaderImpl implements WordReader {
             }
 
         }
-        return words;
+        Map<Integer, List<String>> wordsJoinLength = words.stream()
+                .collect(
+                        Collectors.groupingBy(
+                                word -> word.length()
+                        )
+                );
+        return wordsJoinLength;
     }
 }
