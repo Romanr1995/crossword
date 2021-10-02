@@ -6,5 +6,6 @@ import java.util.Set;
 
 public interface WordReader {
 
+
     Map<Integer, List<String>> getWords();
 }
