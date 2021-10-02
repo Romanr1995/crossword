@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type="text/javascript">
+    function makeRequest() {
+        document.getElementById("errLbl").hidden = true
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.addEventListener("load", processResponse)
+        xhr.open("POST", "crossword")
+
+        xhr.setRequestHeader("Content-Type", "application/json")
+
+        let data = {
+            firstName: document.getElementById("word").value
+        }
+
+        xhr.send(JSON.stringify(data))
+    }
+
+    function processResponse() {
+        if (this.status === 200) {
+            document.getElementById("out").innerText = this.responseText
+        } else {
+            document.getElementById("errLbl").hidden = false
+        }
+    }
+
+</script>
+<head>
+    <meta charset="UTF-8">
+    <title>Кроссворд</title>
+</head>
+<body>
+
+<div>
+    <label for="word">Слово</label><input name="Слово" id="word">
+</div>
+
+<div>
+    <center>
+        <button name="Add" onclick="makeRequest()">Ввести</button>
+        <label id="errLbl" hidden>ошибка выполнения запроса!</label>
+    </center>
+</div>
+<div>
+    <label for="out">Ответ</label> <textarea id="out" readonly></textarea>
+</div>
+
+</body>
+</html>
